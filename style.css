@@ -1,0 +1,213 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0e0e0e;
+  color: #eee;
+  min-height: 100vh;
+  direction: rtl; /* اتجاه النص من اليمين لليسار */
+  overflow-x: hidden; /* لمنع ظهور شريط التمرير الأفقي */
+  font-size: 16px; /* حجم الخط الأساسي للجسم، يمكن تعديله لاحقاً */
+}
+
+/* ======= SIDEBAR ======= */
+.sidebar {
+  width: 250px; /* عرض السايدبار على الشاشات الكبيرة */
+  background-color: #1a1a1a;
+  padding: 20px;
+  box-shadow: 2px 0 10px rgba(128, 0, 128, 0.4);
+  position: fixed;
+  right: 0; /* إظهار السايدبار بشكل افتراضي على الشاشات الكبيرة */
+  top: 0;
+  bottom: 0;
+  transition: transform 0.3s ease; /* استخدام transform لتحريك السايدبار */
+  z-index: 999;
+}
+
+.sidebar h2 {
+  color: #bb00ff;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.8em; /* حجم العنوان في السايدبار */
+}
+
+.sidebar a {
+  display: block;
+  padding: 10px 0;
+  color: #eee;
+  text-decoration: none;
+  transition: 0.3s;
+  border-right: 3px solid transparent;
+  padding-right: 10px;
+  font-size: 1.1em; /* حجم روابط القائمة */
+}
+
+.sidebar a:hover {
+  color: #bb00ff;
+  border-color: #bb00ff;
+  background-color: #222;
+}
+
+/* ======= CONTENT ======= */
+.content {
+  margin-right: 270px; /* مساحة للمحتوى بجانب السايدبار (عرض السايدبار + مسافة) */
+  padding: 40px;
+  width: auto; /* عرض تلقائي للمحتوى */
+  transition: margin-right 0.3s ease; /* حركة سلسة للمحتوى */
+}
+
+.content h1 {
+  color: #bb00ff;
+  margin-bottom: 10px;
+  font-size: 2.5em; /* حجم العنوان الرئيسي */
+}
+
+.content p {
+  font-size: 1.1em;
+  color: #ccc;
+  line-height: 1.8;
+}
+
+.download-btn {
+  display: inline-block;
+  background-color: #bb00ff;
+  color: white;
+  padding: 12px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: background 0.3s;
+  margin-top: 15px;
+  font-size: 1.1em;
+}
+
+.download-btn:hover {
+  background-color: #8a00cc;
+}
+
+.panel {
+  background-color: #1a1a1a;
+  border: 1px solid #444;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(187, 0, 255, 0.2);
+}
+
+.panel h2 {
+  color: #bb00ff;
+  margin-bottom: 10px;
+  font-size: 1.5em;
+}
+
+.panel p {
+  font-size: 1em;
+  line-height: 1.8;
+  color: #ccc;
+}
+
+/* زر القائمة (Menu Toggle Button) - مخفي افتراضياً على الشاشات الكبيرة */
+.menu-toggle {
+    display: none; /* إخفاء الزر على الشاشات الكبيرة */
+    position: fixed; /* يبقى الزر ثابتاً على الشاشة */
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: #bb00ff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.menu-toggle:hover {
+    background-color: #8a00cc;
+}
+
+/* ======= RESPONSIVE (تعديلات الشاشات الصغيرة - الجوالات والتابلت) ======= */
+/* سيتم تطبيق هذا الكود عندما يكون عرض الشاشة 768 بكسل أو أقل */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 220px; /* عرض السايدبار في الشاشات الصغيرة */
+    right: -220px; /* إخفاء السايدبار خارج الشاشة من اليمين */
+    transform: translateX(0); /* إعادة تعيين التحويل */
+  }
+
+  /* هذا الكلاس يضاف بواسطة JavaScript لإظهار القائمة على الشاشات الصغيرة */
+  .sidebar.active {
+    right: 0; /* إظهار القائمة بتحريكها إلى الموضع 0 من اليمين */
+  }
+
+  .content {
+    margin-right: 0; /* إزالة الهامش الثابت للمحتوى */
+    padding: 20px; /* تقليل البادينغ للمحتوى */
+    padding-top: 80px; /* زيادة البادينغ العلوي للمحتوى لتجنب تداخل الزر */
+  }
+
+  /* إزاحة المحتوى عند ظهور القائمة على الجوالات */
+  body.sidebar-open .content {
+    margin-right: 220px; /* إزاحة المحتوى بنفس عرض السايدبار */
+  }
+
+  /* إظهار زر القائمة على الشاشات الصغيرة */
+  .menu-toggle {
+    display: block; /* إظهار الزر */
+    top: 15px;
+    right: 15px;
+  }
+
+  /* تعديل أحجام الخطوط لتناسب الجوالات والتابلت */
+  body {
+    font-size: 14px; /* حجم خط أساسي أصغر للجوال */
+  }
+  .content h1 {
+    font-size: 2em; /* حجم العنوان الرئيسي أصغر */
+  }
+  .content p {
+    font-size: 1em; /* حجم الفقرات أصغر قليلاً */
+  }
+  .sidebar h2 {
+    font-size: 1.5em;
+  }
+  .sidebar a {
+    font-size: 1em;
+  }
+  .download-btn {
+    padding: 10px 15px;
+    font-size: 0.9em;
+  }
+  .panel h2 {
+    font-size: 1.3em;
+  }
+  .panel p {
+    font-size: 0.9em;
+  }
+}
+
+/* ======= RESPONSIVE (تعديلات شاشات التابلت - بين 769px و 1024px) ======= */
+/* يمكن إضافة Media Query إضافي للتحكم بشكل أدق في التابلت */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .sidebar {
+    width: 200px; /* قد تفضل عرض أصغر للتابلت */
+    right: 0; /* ظاهرة بشكل دائم على التابلت */
+  }
+
+  .content {
+    margin-right: 220px; /* مسافة للمحتوى بجانب السايدبار */
+    padding: 30px; /* تعديل البادينغ */
+  }
+
+  .content h1 {
+    font-size: 2.2em;
+  }
+
+  .download-btn {
+    padding: 10px 18px;
+  }
+}
